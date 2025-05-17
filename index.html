@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="game">
+        <div class="board-layout">
+            <div class="timer-component timer-component-2">
+                <div class="timre-2 timer-black" id="timer-2">
+                    <span class="timer-text" id="timer-black">10:00</span>
+                </div>
+            </div>
+            <div class="board" id="board">
+                
+            </div>
+            <div id="promotion-dialog" class="promotion-dialog hidden">
+                <div class="promotion-pieces">
+                    <img src="./images/wq.png" class="promotion-piece" data-piece="q">
+                    <img src="./images/wr.png" class="promotion-piece" data-piece="r">
+                    <img src="./images/wb.png" class="promotion-piece" data-piece="b">
+                    <img src="./images/wn.png" class="promotion-piece" data-piece="n">
+                </div>
+            </div>
+            <div class="timer-component timer-component-1">
+                <div class="timer-1 timer-white timer-white-active" id="timer-1">
+                    <span class="timer-text" id="timer-white">10:00</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="scoreboard">
+
+            <div class="notation"></div>
+            
+            <button class="flip-button" id="flip-button"></button>
+        </div>
+    </div>
+    </div>
+    <script type="module" src="index2.js"></script>
+</body>
+
+</html>

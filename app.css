@@ -1,0 +1,168 @@
+body {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.game {
+    display: flex;
+    border: 2px solid black;
+    min-height: 95vh;
+    width: 95vw;
+}
+
+.board-layout {
+    display: grid;
+    grid-template-rows: auto 0fr auto;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    height: 100%;
+    width: 60%;
+    gap: 0;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, auto);
+    border: 2px solid #000000;
+    width: 75vh;
+    height: 75vh;
+    margin: 0 auto;
+}
+
+.square {
+    display: inline;
+    background-color: rgb(236, 237, 209);
+    overflow: hidden;
+    white-space: nowrap;
+    height: calc(75vh / 8);
+    width: calc(75vh / 8);
+}
+
+.square-2 {
+    background-color: rgb(115, 148, 81);
+    color: white;
+}
+
+.piece {
+    cursor: move;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.promotion-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border: 2px solid black;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.promotion-pieces {
+    display: flex;
+    gap: 10px;
+}
+
+.promotion-piece {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.promotion-piece:hover {
+    background: #eee;
+}
+
+
+.letter-row {
+    padding-top: 7vh;
+    padding-right: 2px;
+    float: inline-end;
+}
+
+.scoreboard {
+    border: 2px solid blue;
+    height: 100%;
+    width: 40%;
+    justify-content: center;
+}
+
+.timebox {
+    display: flex;
+    background-color: purple;
+    height: 20%;
+    width: 100%;
+    justify-content: center;
+    margin: auto;
+}
+
+.notation {
+    background-color: yellow;
+    height: 60%;
+    width: 100%;
+}
+
+.flip-button {
+    padding: 10%;
+    margin: auto;
+}
+
+.timer-component {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 9vh;
+}
+
+.timer-component-1 {
+    margin-bottom: auto;
+    
+    align-self: flex-end;
+}
+
+.timer-component-2 {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.timer-text {
+    font-size: 50px;
+    margin: auto;
+}
+
+
+.timer-white {
+    background-color: #444444;
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    color: black;
+}
+
+.timer-white-active {
+    background-color: #dddddd;
+}
+
+.timer-black {
+    background-color: #111111;
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    color: #444444
+}
+
+.timer-black-active {
+    color: #FFFFFF
+}
