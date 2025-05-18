@@ -11,19 +11,16 @@ export default class MoveValidator {
         alivePieces.forEach(piece => {
             if (piece.slice(0, 1) === oppColor) {
                 const pieceId = document.getElementById(piece)
-                if(checkKing){
-                    if (this.isValidMove(pieceId, square, false, true)) {
-                    attackingPieces.push(piece)
-                    console.log("attacking pieces: ", attackingPieces)
-                    isUnderAttack = true
-                }
-                }
-                else if (this.isValidMove(pieceId, square, false)) {
-                    console.log("attacking piece: ", piece)
+                if (this.isValidMove(pieceId, square, false)) {
+                    attackingPieces.push(piece);
                     isUnderAttack = true
                 }
             }
         });
+        if(checkKing){
+            console.log("attacking pieces: ", attackingPieces);
+            this.state.checkingPieces = attackingPieces;
+        }
         return isUnderAttack
     }
 
@@ -57,7 +54,6 @@ export default class MoveValidator {
                 const newSquareN = String(parseInt(newNum))
                 const newSquare = document.getElementById(newSquareL + newSquareN)
                 arr.push(newSquareL + newSquareN)
-                console.log(arr)
 
 
                 if (newSquare) {

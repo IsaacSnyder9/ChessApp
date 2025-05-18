@@ -28,7 +28,7 @@ export default class GameState {
 
         this.whiteInCheck = false;
         this.blackInCheck = false;
-        this.squaresInBetweenCheck = [];
+        this.checkingPieces= [];
     }
 
     updateTurn() {
