@@ -57,6 +57,7 @@ export default class GameState {
 
     handleCheck(king) {
         const kingSquare = king.parentElement
+        const kingColor = king.id.slice(0, 1)
 
         if (this.checkedSquare) {
             document.getElementById(this.checkedSquare).className = this.checkedSquareClasses;
@@ -64,12 +65,15 @@ export default class GameState {
         this.checkedSquare = kingSquare.id
         this.checkedSquareClasses = kingSquare.className
         kingSquare.className += ' square-check';
+        kingColor === 'w' ? this.whiteInCheck = true : this.blackInCheck = true
     }
     removeCheck() {
         if (this.checkedSquare) {
             document.getElementById(this.checkedSquare).className = this.checkedSquareClasses;
             this.checkedSquare = null;
             this.checkedSquareClasses = null;
+            this.whiteInCheck = false;
+            this.blackInCheck = false;
         }
     }
 }
