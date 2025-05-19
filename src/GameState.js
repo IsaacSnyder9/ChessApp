@@ -28,13 +28,15 @@ export default class GameState {
 
         this.whiteInCheck = false;
         this.blackInCheck = false;
-        this.checkingPieces= [];
+        this.checkingPieces = [];
+        this.checkedSquare = null;
+        this.checkedSquareClasses = null;
     }
 
     updateTurn() {
         this.turn = this.turn === "w" ? "b" : "w";
         this.timer.updateActiveTimerClass(this.whiteTimerId, this.blackTimerId);
-        
+
     }
 
     resetEnPassant() {
@@ -46,10 +48,28 @@ export default class GameState {
         }
     }
 
-    getAlivePieces(){
+    getAlivePieces() {
         const pieces = document.querySelectorAll('.piece')
         const alivePieceIds = Array.from(pieces).map(p => p.id)
-        
+
         this.alivePieces = alivePieceIds
+    }
+
+    handleCheck(king) {
+        const kingSquare = king.parentElement
+
+        if (this.checkedSquare) {
+            document.getElementById(this.checkedSquare).className = this.checkedSquareClasses;
+        }
+        this.checkedSquare = kingSquare.id
+        this.checkedSquareClasses = kingSquare.className
+        kingSquare.className += ' square-check';
+    }
+    removeCheck() {
+        if (this.checkedSquare) {
+            document.getElementById(this.checkedSquare).className = this.checkedSquareClasses;
+            this.checkedSquare = null;
+            this.checkedSquareClasses = null;
+        }
     }
 }

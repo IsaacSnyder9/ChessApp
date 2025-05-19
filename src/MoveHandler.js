@@ -24,6 +24,9 @@ export class MoveHandler {
         const targetNumber = target.id.slice(1, 2);
         if (this.validation.isValidMove(piece, target) && this.state.turn === pieceColor) {
             console.log(pieceType, targetNumber, target)
+
+            this.state.removeCheck();
+
             if (pieceType === "wp" && targetNumber === "8" || pieceType === "bp" && targetNumber === "1") {
                 this.state.promotionInProgress = true;
                 console.log("promotion");
@@ -61,14 +64,17 @@ export class MoveHandler {
                 target.appendChild(piece);
 
                 this.state.updateTurn();
-                
+
                 const currentKing = document.getElementById(this.state.turn + 'k')
                 const kingSquare = currentKing.parentElement
                 console.log("king square: ", kingSquare)
-                
-                if(this.validation.isSquareUnderAttack(kingSquare, this.state.turn, true)){
-                    if(!this.validation.canKingMove(currentKing)){
-                        console.log('checkmate!')
+
+                if (this.validation.isSquareUnderAttack(kingSquare, this.state.turn, true)) {
+                    this.state.handleCheck(currentKing);
+                    if (!this.validation.canKingMove(currentKing)) {
+                        if (!this.validation.canCheckBeBlocked(currentKing, this.state.checkingPieces)) {
+                            console.log('checkmate!')
+                        }
                     }
                     this.state.turn === 'w' ? this.whiteInCheck = true : this.blackInCheck = true;
                 }

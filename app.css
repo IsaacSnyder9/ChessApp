@@ -45,6 +45,10 @@ body {
     color: white;
 }
 
+.square-check {
+    background-color: red;
+}
+
 .piece {
     cursor: move;
     width: 100%;
