@@ -167,7 +167,7 @@ export default class MoveValidator {
         let letStep = startL < endL ? 1 : -1;
         let row = startN + numStep;
         let col = startL + letStep;
-        while (row !== endN && col !== endN) {
+        while (row !== endN && col !== endL) {
           const squareId = `${String.fromCharCode("a".charCodeAt(0) + col - 1)}${row}`;
           if (returnInBetween) {
             squaresArr.push(squareId);
