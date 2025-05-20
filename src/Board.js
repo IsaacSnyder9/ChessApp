@@ -23,13 +23,13 @@ export default class Board {
             divElement.id = `${co}`
 
             this.board.appendChild(divElement)
-            this.BoardArr[co] = divElement;
+            this.state.coord[co] = divElement;
 
             divElement.addEventListener('dragover', (e) => {
                 e.preventDefault();
             });
             divElement.addEventListener('drop', (e) => {
-                this.moveHandler.handleDrop(e, this.BoardArr);
+                this.moveHandler.handleDrop(e, this.state.coord);
                 console.log(this.state.coord)
             }); 
         })
@@ -37,8 +37,8 @@ export default class Board {
     flipBoard() {
         const savePiecePositions = () => {
             const positions = {}
-            Object.keys(this.BoardArr).forEach((squareId) => {
-                const piece = this.BoardArr[squareId].querySelector('.piece');
+            Object.keys(this.state.coord).forEach((squareId) => {
+                const piece = this.state.coord[squareId].querySelector('.piece');
                 if (piece) {
                     positions[squareId] = piece.id;
                 }
@@ -54,7 +54,8 @@ export default class Board {
         const savedPieceArray = Object.values(piecePositions)
 
         this.board.innerHTML = "";
-        this.BoardArr = {}
+        console.log(this.state.coord)
+        this.state.coord = {}
 
         this.state.timer.flipTimers()
         this.state.timer.updateActiveTimerClass(this.state.whiteTimerId, this.state.blackTimerId)
@@ -63,7 +64,10 @@ export default class Board {
         
         this.buildBoard();
 
-        const reversePieceManager = new PieceManager(this.BoardArr)
+        this.moveHandler = new MoveHandler(this.state)
+
+        const reversePieceManager = new PieceManager(this.state)
         reversePieceManager.piecePlacement(piecePositions, savedPieceArray)
+        this.state.getAlivePieces();
     }
 }
