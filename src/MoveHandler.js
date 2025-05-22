@@ -73,7 +73,7 @@ export class MoveHandler {
                     this.state.handleCheck(currentKing);
                     if (!this.validation.canKingMove(currentKing)) {
                         if (!this.validation.canCheckBeBlocked(currentKing, this.state.checkingPieces)) {
-                            console.log('checkmate!')
+                            this.state.handleCheckmate(currentKing)
                         }
                     }
                     this.state.turn === 'w' ? this.whiteInCheck = true : this.blackInCheck = true;

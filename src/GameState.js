@@ -76,4 +76,7 @@ export default class GameState {
             this.blackInCheck = false;
         }
     }
+    handleCheckmate(king) {
+        king.className += ' king-checkmate';
+    }
 }

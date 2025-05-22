@@ -49,6 +49,11 @@ body {
     background-color: red;
 }
 
+.king-checkmate {
+    background-color: gold;
+    transform: rotate(90deg);
+}
+
 .piece {
     cursor: move;
     width: 100%;

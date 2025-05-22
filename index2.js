@@ -1,6 +1,6 @@
 import Board from "./src/board.js";
 import { INITIAL_POSITIONS, PIECE_ARRAY } from "./src/config.js";
-import GameState from "./src/gamestate.js";
+import GameState from "./src/GameState.js";
 import PieceManager from "./src/pieces.js";
 
 function newGame() {

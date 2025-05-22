@@ -81,16 +81,15 @@ export default class MoveValidator {
     if (atPieces.length !== 1) {
       return false;
     }
-    if (atPieces.slice(1, 2) === "n") {
-      return false;
-    }
     const color = king.id.slice(0, 1);
     const kingSquare = king.parentElement;
     const attackingPieceId = document.getElementById(atPieces[0]);
-    const squaresInbetween = this.isValidMove(attackingPieceId, kingSquare, false, true);
+    const squaresInbetween = atPieces[0].slice(1, 2) === "n" ? [attackingPieceId.parentElement.id] : this.isValidMove(attackingPieceId, kingSquare, false, true);
     const alivePieces = this.state.alivePieces;
 
     let canBlock = false;
+
+    console.log("squaresinbetween ", squaresInbetween);
 
     squaresInbetween.forEach((sq) => {
       alivePieces.forEach((pi) => {
@@ -171,7 +170,7 @@ export default class MoveValidator {
         let letStep = startL < endL ? 1 : -1;
         let row = startN + numStep;
         let col = startL + letStep;
-        while (row !== endN && col !== endL) {
+        while (row !== endN || col !== endL) {
           const squareId = `${String.fromCharCode("a".charCodeAt(0) + col - 1)}${row}`;
           if (returnInBetween) {
             squaresArr.push(squareId);
@@ -229,8 +228,7 @@ export default class MoveValidator {
             return false;
           }
           if (activeMove) {
-            this.state.allowEnPessant = `${targetLetter}3`;
-            console.log(this.state.allowEnPessant);
+            this.state.allowEnPessant = `w${targetLetter}3`;
             this.state.epSwitch = true;
           }
           return true;
@@ -238,11 +236,12 @@ export default class MoveValidator {
         return currentNum + 1 === targetNum;
       }
       if (letterDiff === 1 && currentNum + 1 === targetNum) {
-        if (this.state.allowEnPessant === `${targetLetter}${targetNum}`) {
+        if (this.state.allowEnPessant === `b${targetLetter}${targetNum}`) {
           if (activeMove) {
             this.state.triggerEnPessant = true;
           }
-          return true;
+          console.log(this.state.allowEnPessant)
+          return true ;
         }
         return targetPiece && targetPiece.id.slice(0, 1) === "b";
       }
@@ -256,7 +255,7 @@ export default class MoveValidator {
             return false;
           }
           if (activeMove) {
-            this.state.allowEnPessant = `${targetLetter}6`;
+            this.state.allowEnPessant = `b${targetLetter}6`;
             console.log(this.state.allowEnPessant);
             this.state.epSwitch = true;
           }
@@ -265,7 +264,7 @@ export default class MoveValidator {
         return currentNum - 1 === targetNum;
       }
       if (letterDiff === 1 && currentNum - 1 === targetNum) {
-        if (this.state.allowEnPessant === `${targetLetter}${targetNum}`) {
+        if (this.state.allowEnPessant === `w${targetLetter}${targetNum}`) {
           if (activeMove) {
             this.state.triggerEnPessant = true;
           }
@@ -319,7 +318,7 @@ export default class MoveValidator {
 
     // white king
     if (pieceType === "wk") {
-      if ((!this.isSquareUnderAttack(targetSquare, "w") && activeMove) || !activeMove) {
+      if (!activeMove || (!this.isSquareUnderAttack(targetSquare, "w") && activeMove)) {
         if (targetSquare === "c1" && !this.state.hasWKingMoved && !this.state.hasWRook1Moved) {
           if (isPathClear(currentNum, targetNum, currentLetterNum, 1)) {
             if (activeMove) {
@@ -351,7 +350,7 @@ export default class MoveValidator {
 
     // black king
     if (pieceType === "bk") {
-      if ((!this.isSquareUnderAttack(targetSquare, "b") && activeMove) || !activeMove) {
+      if (!activeMove || (!this.isSquareUnderAttack(targetSquare, "b") && activeMove)) {
         if (targetSquare === "c8" && !this.state.hasBKingMoved && !this.state.hasBRook1Moved) {
           if (isPathClear(currentNum, targetNum, currentLetterNum, 1)) {
             if (activeMove) {
